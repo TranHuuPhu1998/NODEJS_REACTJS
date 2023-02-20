@@ -1,0 +1,16 @@
+.nav-link{
+  display: flex;
+  padding-left: 10px;
+  border-radius: 10px;
+  margin: 0 30px 10px 30px;
+    img {
+      padding-right: 20px;
+    }
+    &:hover {
+      background-color: rgb(54, 48, 48);
+    }
+
+}
+.nav-link.active{
+  background-color: rgb(54, 48, 48);
+}

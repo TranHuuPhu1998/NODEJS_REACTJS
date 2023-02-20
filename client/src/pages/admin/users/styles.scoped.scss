@@ -1,0 +1,14 @@
+.avatar__preview {
+  .img-upload {
+      width: 100%;
+      max-height: 300px;
+      height: 100%;
+      object-fit: contain;
+  }
+  label {
+    width: 100%;
+  }
+  p {
+    color: #ff7200;
+  }
+}

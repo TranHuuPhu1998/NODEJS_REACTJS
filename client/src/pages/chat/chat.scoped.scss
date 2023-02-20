@@ -1,0 +1,27 @@
+.chat-item {
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+  &:last-child {
+    border-top: 1px solid #e5e5e5;
+  }
+}
+.render-chat {
+  border: 2px solid #eceff1;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  height: 500px;
+  overflow-y: scroll;
+  flex-direction: column-reverse;
+  // justify-content: flex-end;
+  display: flex;
+}
+.user-chat {
+  padding: 5px 10px;
+  border-right: 1px solid #eceff1;
+  margin-right: 10px;
+}
+.your-message .user-chat{
+  color: brown;
+}

@@ -1,0 +1,146 @@
+.main-div {
+  background-color: white;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 10px auto 0px auto;
+  border-radius: 10px;
+  display: flex;
+  ul.li {
+    color: black;
+  }
+}
+.inner-div {
+  padding-left: 20px;
+  width: 100%;
+}
+.question-list {
+  border-right: 1px solid #cccccc;
+  min-width: 300px;
+  max-width: 315px;
+}
+.question-title {
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+}
+.question-content {
+  display: flex;
+  flex-direction: column;
+}
+.btn-custom {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 21px;
+  text-align: center;
+  padding: 0.375em 2em;
+  height: 48px;
+  border-radius: 24px;
+  outline: none;
+  color: #67758D;
+  border: 1px solid #FAD20B;
+}
+.btn-custom.disabled {
+  background-color: rgb(73, 70, 70);
+  pointer-events: none;
+}
+.list-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-top: 1px solid #cccccc;
+  padding-top: 20px;
+}
+.save-question {
+  background-color: #FAD20B;
+}
+.submit-question {
+  background-color: #ebedf3;
+}
+.go-back {
+  background-color: #cccccc;
+  &:hover{
+  background-color: #FEF4C2;
+  }
+}
+.create-test  {
+  border-top: 1px solid #ebedf3;
+  max-height: calc(100vh - 350px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap !important;
+  .list-item {
+    -webkit-box-flex: 0;
+    flex: 0 0 20%;
+    padding: 15px;
+    cursor: pointer;
+    &:hover {
+      background-color: #d1cebf;
+    }
+  }
+  .active-question {
+    background-color: #d1cebf;
+  }
+  .question-item {
+    height: 40px;
+    width: 40px;
+    border-radius: 6px;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border:1px solid #67758D;
+  }
+}
+.list-answer {
+  list-style: none;
+  border-top: 1px solid #cccccc;
+}
+.question-content {
+  color: black;
+  padding-bottom: 20px;
+}
+.answer {
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+.answer-item {
+  display: flex;
+  margin-bottom: 20px;
+}
+.text {
+  font-weight: bold;
+  color: black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.question-name {
+  font-weight: 900;
+}
+.user-submit {
+  background-color: blueviolet;
+  position: relative;
+  color: wheat;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    left: 5px;
+    border-top: 3px solid red;
+    border-left: 3px solid red;
+    height: 14px;
+    transform: rotate(228deg);
+    overflow: hidden;
+  }
+}
+.text-blue {
+  color: blue;
+}
+.text-success-info {
+  height: 200px;
+  text-align: center;
+}

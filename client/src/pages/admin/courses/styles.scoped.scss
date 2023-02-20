@@ -1,0 +1,82 @@
+.modal__contract {
+  width: calc(100% - 1rem);
+  max-width: 730px;
+  .body__contract {
+    .star-require {
+      color: #e01818;
+    }
+    .renewable {
+      font-family: Rubik;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 34px;
+      color: #151515;
+    }
+    .card-renewable {
+      border: 1px solid #8a8a8a;
+      .card-yes-choice {
+        background: #f5f5f5;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+      .upload-icon {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background-size: 100%;
+        // background-image: url(../../../library/assets/components/upload.svg);
+        cursor: pointer;
+      }
+      .file-name {
+        font-family: Rubik;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 34px;
+        color: #151515;
+      }
+      .close-icon {
+        cursor: pointer;
+      }
+    }
+  }
+  .footer__btn {
+    padding: 30px 50px;
+    .btn {
+      width: 159px;
+      &.btn-outline-secondary {
+        color: #ff7200;
+        border-color: #ff7200;
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: #ff7200;
+          color: #fff;
+          box-shadow: 0 0 0 0.2rem rgba(255, 114, 0, 0.5);
+        }
+      }
+    }
+  }
+}
+
+.avatar__preview {
+  .img-upload {
+      width: 100%;
+      max-height: 300px;
+      height: 100%;
+      object-fit: contain;
+  }
+  label {
+    width: 100%;
+  }
+  p {
+    color: #ff7200;
+  }
+}
+
+.icon-learning {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
