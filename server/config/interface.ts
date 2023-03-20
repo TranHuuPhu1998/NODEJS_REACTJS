@@ -1,6 +1,8 @@
 import { Document } from 'mongoose'
-import {Request} from 'express'
-export interface IUser extends Document{
+import { Request } from 'express'
+export interface IUser extends Document {
+  updatedAt: string
+  createdAt: string
   name: string
   account: string
   password: string
@@ -32,38 +34,38 @@ export interface IGgPayload {
 }
 
 export interface IUserParams {
-  name: string 
-  account: string 
+  name: string
+  account: string
   password: string
   avatar?: string
   type: string
 }
 
 export interface IReqAuth extends Request {
-  user? : IUser
+  user?: IUser
 }
 
 export interface IAnswers {
-  content : string
-  isCorrect : boolean
-  questionsId : string
+  content: string
+  isCorrect: boolean
+  questionsId: string
 }
 
 export interface IQuestions {
   name: string
-  categoryId : string
-  answersId : Array<IAnswers>
+  categoryId: string
+  answersId: Array<IAnswers>
 }
 
 export interface ICourse {
-  name : string
-  released : boolean
-  categoryId : string
-  descriptions : string
+  name: string
+  released: boolean
+  categoryId: string
+  descriptions: string
 }
 
 export interface ICategory {
-  name? : string
+  name?: string
 }
 
 export interface IChat {

@@ -1,24 +1,27 @@
-import {Request , Response , NextFunction} from 'express'
-import Users from '../models/userModel'
-import jwt from 'jsonwebtoken'
-import { IDecodedToken , IReqAuth} from '../config/interface'
+import { Request, Response, NextFunction } from "express";
+import Users from "../models/userModel";
+import jwt from "jsonwebtoken";
+import { IDecodedToken, IReqAuth } from "../config/interface";
 
-const auth = async (req : IReqAuth , res : Response , next:NextFunction) => {
-    try {
-        const token = req.header("Authorization")
-        if(!token) return res.status(400).json({msg : "Invalid Authentication."})
+const auth = async (req: IReqAuth, res: Response, next: NextFunction) => {
+  try {
+    const token = req.header("Authorization");
+    if (!token) return res.status(400).json({ msg: "Invalid Authentication." });
 
-        const decoded = <IDecodedToken>jwt.verify(token , `${process.env.ACCESS_TOKEN_SECRET}`)
-        if(!decoded) return res.status(400).json({msg : "Invalid Authentication."})
-    
-        const user = await Users.findOne({_id : decoded.id})
-        if(!user) return res.status(400).json({msg : "User dose not exits."})
-        req.user = user;
+    const decoded = <IDecodedToken>(
+      jwt.verify(token, `${process.env.ACCESS_TOKEN_SECRET}`)
+    );
+    if (!decoded)
+      return res.status(400).json({ msg: "Invalid Authentication." });
 
-        next()
-    } catch (error : any) {
-        return res.status(500).json({msg:error.message})
-    }
-}
+    const user = await Users.findOne({ _id: decoded.id });
+    if (!user) return res.status(400).json({ msg: "User dose not exits." });
+    req.user = user;
 
-export default auth
+    next();
+  } catch (error: any) {
+    return res.status(500).json({ msg: error.message });
+  }
+};
+
+export default auth;

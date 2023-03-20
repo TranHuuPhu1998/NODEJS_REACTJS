@@ -1,6 +1,5 @@
 import axiosService from "../axios/axios-service";
 import { API_ENDPOINT } from "../constants";
-console.log("🚀 ~ file: auth-service.js:3 ~ API_ENDPOINT", API_ENDPOINT)
 
 const url = "auth";
 

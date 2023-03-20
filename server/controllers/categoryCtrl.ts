@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Category from "../models/categoryModal";
 import { IReqAuth } from "../config/interface";
+import log from "../utils/logger";
 
 const Pagination = (req: IReqAuth) => {
   let page = Number(req.query.page) * 1 || 1;
@@ -12,6 +13,8 @@ const Pagination = (req: IReqAuth) => {
 
 const categoryCtrl = {
   createCategory: async (req: IReqAuth, res: Response) => {
+    console.time('START createCategory');
+
     if (!req.user)
       return res.status(400).json({ msg: "Invalid Authentication User." });
 
@@ -19,13 +22,17 @@ const categoryCtrl = {
       return res.status(400).json({ msg: "Invalid Authentication Admin." });
 
     try {
+      console.time('START createCategory');
       const name = req.body.name.toLowerCase();
       const user = req.user._id;
       const rows = new Category({ name, user });
 
       await rows.save();
 
-      res.json({ rows });
+      console.timeEnd('START createCategory');
+
+      return res.json({ rows });
+
     } catch (err: any) {
       let errMsg;
 
@@ -35,9 +42,9 @@ const categoryCtrl = {
         const name = Object.keys(err.errors)[0];
         errMsg = err.errors[`${name}`].message;
       }
-
       return res.status(500).json({ msg: errMsg });
     }
+
   },
   getCategories: async (req: Request | any, res: Response) => {
     const { limit, page } = Pagination(req);
@@ -49,7 +56,7 @@ const categoryCtrl = {
     try {
       let query = [];
       if (req.query.name) {
-        query.push({ name: { $regex: `.*${req.query.name}.*`, $options : 'i' } });
+        query.push({ name: { $regex: `.*${req.query.name}.*`, $options: 'i' } });
       } else {
         query = [{ _id: { $exists: true } }];
       }
@@ -66,7 +73,7 @@ const categoryCtrl = {
         },
         {
           $addFields: {
-            userName:  { $arrayElemAt: ["$userName.name", 0] }
+            userName: { $arrayElemAt: ["$userName.name", 0] }
           }
         },
       ]);

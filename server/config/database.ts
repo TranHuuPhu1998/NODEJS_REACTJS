@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
+import log from "../utils/logger";
 
-const URI = process.env.MONGODB_URL 
+const URI = process.env.MONGODB_URL
 
 mongoose.connect(`${URI}`, {
   useCreateIndex: true,
@@ -8,6 +9,6 @@ mongoose.connect(`${URI}`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }, (err) => {
-  if(err) throw err;
-  console.log('Mongodb connection')
+  if (err) throw err;
+  log.info('Mongodb connection')
 })

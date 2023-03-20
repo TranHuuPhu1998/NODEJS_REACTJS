@@ -7,23 +7,26 @@ import morgan from "morgan";
 import routes from "./routes/index";
 import chatGlobal from "./models/chatGlobal";
 import path from "path";
-
-const mongoose = require("mongoose");
-const fs = require('fs');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger.json');
-const customCss = fs.readFileSync((process.cwd()+"/server/swagger.css"), 'utf8');
+import swaggerDocs from "./utils/swagger";
+import log from "./utils/logger";
+import mongoSanitize from 'express-mongo-sanitize'
 
 // middleware
 const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 
-
 app.use(express.json());
-// let express to use this
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 app.use(express.urlencoded({ extended: false }));
+// By default, $ and . characters are removed completely from user-supplied input in the following places:
+// - req.body
+// - req.params
+// - req.headers
+// - req.query
+
+// To remove data using these defaults:
+app.use(mongoSanitize());
+// Cors
 app.use(cors());
 app.use(morgan("dev"));
 app.use(cookieParser());
@@ -42,26 +45,10 @@ app.use("/api", routes.courseRouter);
 // config database
 import "./config/database";
 
-const URI = process.env.MONGODB_URL;
-mongoose.connect(
-  URI,
-  {
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  (err: any) => {
-    if (err) throw err;
-    console.log("Connected to mongosedb");
-  }
-);
-
 // socket io
 io.on("connection", (socket: any) => {
   socket.on("sendDataClient", async function (data: any) {
     // Handle khi có sự kiện tên là sendDataClient từ phía client
-    console.log(data);
     if (data) {
       const rows = new chatGlobal({
         userId: data.userId,
@@ -76,10 +63,11 @@ io.on("connection", (socket: any) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("Client disconnected"); // Khi client disconnect thì log ra terminal.
+    log.info("Client disconnected"); // Khi client disconnect thì log ra terminal.
   });
 });
 
+// build
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
@@ -90,5 +78,7 @@ if (process.env.NODE_ENV === "production") {
 // server listenning
 const POST = process.env.PORT || 5000;
 http.listen(POST, function () {
-  console.log("listening on port ", POST);
+  log.info("listening on port ", POST);
+  //add swagger docs
+  swaggerDocs(app, Number(POST));
 });

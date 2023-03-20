@@ -9,15 +9,16 @@ const categorySchema = new mongoose.Schema(
       required: [true, "Please add user"],
     },
     name: {
-      type : String,
+      type: String,
       required: [true, "Please add your name"],
       trim: true,
     },
   },
   {
     timestamps: true,
+    versionKey: false, // You should be aware of the outcome after set to false
   }
 );
-categorySchema.plugin(aggregatePaginate)
+categorySchema.plugin(aggregatePaginate);
 
 export default mongoose.model("category", categorySchema);

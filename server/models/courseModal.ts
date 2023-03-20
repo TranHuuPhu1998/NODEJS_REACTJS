@@ -1,34 +1,38 @@
-import mongoose from 'mongoose'
-import {ICourse} from '../config/interface'
+import mongoose from "mongoose";
+import { ICourse } from "../config/interface";
 
-const courseSchema = new mongoose.Schema({
-    user: { type: mongoose.Types.ObjectId, ref: 'user' },
-    imageBanner : {
-        type : String,
-        required : [true, "Please add your image Banner"],
+const courseSchema = new mongoose.Schema(
+  {
+    user: { type: mongoose.Types.ObjectId, ref: "user" },
+    imageBanner: {
+      type: String,
+      required: [true, "Please add your image Banner"],
     },
-    createBy : {
-        type : String,
-        required : [true, "Please add your createBy"],
+    createBy: {
+      type: String,
+      required: [true, "Please add your createBy"],
     },
-    name : {
-        type : String,
-        required : [true, "Please add your name"],
-        trim: true
+    name: {
+      type: String,
+      required: [true, "Please add your name"],
+      trim: true,
     },
-    category : {
-        required : true,
-        type : Object
+    category: {
+      required: true,
+      type: Object,
     },
-    released : {
-        type : Boolean,
+    released: {
+      type: Boolean,
     },
-    descriptions : {
-        type : String,
-        trim: true
-    }
-    }, {
-  timestamps: true
-})
+    descriptions: {
+      type: String,
+      trim: true,
+    },
+  },
+  {
+    timestamps: true,
+    versionKey: false, // You should be aware of the outcome after set to false
+  }
+);
 
-export default mongoose.model<ICourse>('course', courseSchema)
+export default mongoose.model<ICourse>("course", courseSchema);

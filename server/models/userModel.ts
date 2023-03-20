@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import {IUser} from '../config/interface'
+import { IUser } from '../config/interface'
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema({
     default: 'register' // login
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  versionKey: false, // You should be aware of the outcome after set to false
 })
 
 export default mongoose.model<IUser>('user', userSchema)
